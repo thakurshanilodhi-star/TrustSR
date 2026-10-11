@@ -276,28 +276,112 @@ TrustSR/
 ├── LICENSE
 │
 ├── book/
+│   ├── TrustSR_Why_Rollback_Is_Not_Recovery.pdf
 │   ├── manuscript/
-│   └── figures/
+│   ├── figures/
+│   ├── diagrams/
+│   ├── charts/
+│   └── qr_codes/
 │
 ├── labs/
-│   ├── Lab01/
-│   ├── Lab02/
-│   ├── Lab03/
-│   ├── Lab04/
-│   ├── Lab05/
-│   ├── Lab09/
-│   ├── Lab10/
-│   ├── Lab11/
-│   ├── Lab12/
-│   └── Lab13/
+│
+│   ├── 01_Contamination_Analysis/
+│   │
+│   ├── TRUSTSR_Lab_01_Memory_Poisoning_and_Contamination_Graph.ipynb
+│   ├── TRUSTSR_Lab_01_1_Missing_Edge_Failure_Test.ipynb
+│   ├── TRUSTSR_Lab_01_2_Systematic_Missing_Edge_Experiments.ipynb
+│   ├── TRUSTSR_Lab_01_3_Conservative_Unknown_Dependency_Handling.ipynb
+│   ├── TRUSTSR_Lab_01_4_Observable_Only_Conservative_Policy.ipynb
+│   ├── TRUSTSR_Lab_01_5_Recovery_Strategy_Comparison.ipynb
+│   ├── TRUSTSR_Lab_01_6_Randomized_Recovery_Benchmark.ipynb
+│   ├── TRUSTSR_Lab_01_7_Blind_Missing_Edge_Detection.ipynb
+│   └── TRUSTSR_Lab_01_8_Sensitivity_Analysis.ipynb
+│
+│
+│   ├── 02_Trusted_Recovery/
+│   │
+│   ├── TRUSTSR_Lab_02_01_Selective_Recovery_Prototype.ipynb
+│   ├── TRUSTSR_Lab_02_02_Checkpoint_Integrity_and_Provenance.ipynb
+│   ├── TRUSTSR_Lab_02_03_Digital_Signature_Verification.ipynb
+│   ├── TRUSTSR_Lab_02_04_Replay_Protection.ipynb
+│   ├── TRUSTSR_Lab_02_05_Atomic_Version_Advancement.ipynb
+│   ├── TRUSTSR_Lab_02_06_SQLite_Transactional_Persistence.ipynb
+│   ├── TRUSTSR_Lab_02_07_Tamper_Evident_Audit_Trail.ipynb
+│   └── TRUSTSR_Lab_02_FINAL_Integrated_Recovery_and_Audit_Validation.ipynb
+│
+│
+│   ├── 03_Reliability_and_Recovery_Engineering/
+│   │
+│   ├── TRUSTSR_Lab_03_01_Atomic_Checkpoint_and_Audit_Persistence.ipynb
+│   ├── TRUSTSR_Lab_03_02_Failure_Recording_and_Recovery.ipynb
+│   ├── TRUSTSR_Lab_03_03_Independent_Failure_Journal.ipynb
+│   ├── TRUSTSR_Lab_03_04_Retry_and_Idempotency.ipynb
+│   ├── TRUSTSR_Lab_03_05_Retry_Policy_Benchmark.ipynb
+│   ├── TRUSTSR_Lab_03_06_Correlated_Outages.ipynb
+│   ├── TRUSTSR_Lab_03_07_Reliability_Capstone.ipynb
+│   └── TRUSTSR_Lab_03_08_Hard_Crash_Recovery.ipynb
+│
+│
+│   ├── 04_Recovery_Evaluation/
+│   │
+│   ├── TRUSTSR_Lab_04_01_Selective_Recovery_Effectiveness.ipynb
+│   ├── TRUSTSR_Lab_04_02_Uncertainty_Aware_Recovery.ipynb
+│   ├── TRUSTSR_Lab_04_03_Coverage_Signal_Robustness.ipynb
+│   └── TRUSTSR_Lab_04_04_Adversarial_Observability_Stress_Test.ipynb
+│
+│
+│   ├── 05_Recovery_Execution/
+│   │
+│   ├── TRUSTSR_Lab_05_01_Recovery_Execution_and_Verification.ipynb
+│   ├── TRUSTSR_Lab_05_02_Recovery_Retry_and_Idempotence.ipynb
+│   ├── TRUSTSR_Lab_05_03_Persistent_Recovery_Resume.ipynb
+│   ├── TRUSTSR_Lab_05_04_Trust_State_Model.ipynb
+│   ├── TRUSTSR_Lab_05_05_Trust_State_Invariants.ipynb
+│   └── TRUSTSR_Lab_05_06_Recovery_Verification_Engine.ipynb
+│
+│
+│   └── 06_Capstone/
+│       │
+│       ├── TRUSTSR_Lab_12_End_to_End_TrustSR.ipynb
+│       └── TRUSTSR_Lab_13_Authenticated_Checkpoints_and_GroundTruth_Completeness.ipynb
+│
 │
 ├── datasets/
+│   ├── synthetic_graphs/
+│   ├── recovery_benchmarks/
+│   └── evaluation_inputs/
 │
 ├── results/
+│   ├── contamination_analysis/
+│   ├── recovery_evaluation/
+│   ├── verification_results/
+│   ├── benchmark_exports/
+│   └── figures/
+│
+├── docs/
+│   ├── architecture/
+│   ├── threat_model/
+│   ├── trust_state_model/
+│   ├── verification_engine/
+│   ├── recovery_pipeline/
+│   └── publication_materials/
 │
 ├── diagrams/
+│   ├── TrustSR_Architecture.png
+│   ├── Trust_State_Model.png
+│   ├── Recovery_Pipeline.png
+│   ├── Verification_Engine.png
+│   └── End_to_End_Workflow.png
 │
-└── docs/
+├── papers/
+│   ├── technical_report/
+│   ├── whitepaper/
+│   └── future_publications/
+│
+└── examples/
+    ├── quick_start/
+    ├── tutorial/
+    └── sample_runs/
 ```
 
 ---
