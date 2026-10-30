@@ -1,0 +1,23 @@
+{
+  "scenario": "clean_recovery",
+  "description": "Synthetic fixture for a successful recovery path; not production telemetry.",
+  "clean_state": {
+    "counter": 3,
+    "mode": "safe"
+  },
+  "observed_state": {
+    "counter": 999,
+    "mode": "unsafe"
+  },
+  "scope_manifest": {
+    "expected_record_ids": [
+      "event-001",
+      "event-002"
+    ],
+    "expected_count": 2
+  },
+  "observed_record_ids": [
+    "event-001",
+    "event-002"
+  ]
+}

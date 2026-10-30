@@ -1,0 +1,6 @@
+scenario,expected_accept,baseline_accept,trustsr_accept,baseline_correct,trustsr_correct,failed_gates,note
+clean,True,True,True,True,True,,synthetic fixture; not real-agent evidence
+contaminated_state,False,True,False,False,True,contamination_removed,synthetic fixture; not real-agent evidence
+incomplete_scope,False,True,False,False,True,scope_complete,synthetic fixture; not real-agent evidence
+audit_tampered,False,True,False,False,True,audit_valid,synthetic fixture; not real-agent evidence
+missing_recovery_events,False,True,False,False,True,recovery_complete,synthetic fixture; not real-agent evidence

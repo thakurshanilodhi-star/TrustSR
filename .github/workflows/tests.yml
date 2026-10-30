@@ -1,0 +1,95 @@
+name: TrustSR tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  core:
+    name: core (${{ matrix.os }}, py${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test]"
+      - run: python -m pytest -q
+      - run: python experiments/run_synthetic_evaluation.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-evaluation-${{ matrix.os }}-py${{ matrix.python }}
+          path: results/evaluations/
+
+  fresh-install:
+    name: fresh venv install (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/verify_install.py --extras test --report-dir install_runs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: install-run-${{ matrix.os }}
+          path: install_runs/
+
+  notebooks:
+    name: notebooks, plain harness (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,labs]"
+      - run: python -m pytest -q -m notebook
+        env:
+          TRUSTSR_NB_TIMEOUT: '300'
+      - run: python tools/run_notebooks.py --timeout 300 --report-dir notebook_runs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: notebook-run-${{ matrix.os }}
+          path: notebook_runs/
+
+  notebooks-kernel:
+    name: notebooks, Jupyter kernel (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,labs,kernel]"
+      - run: python -m ipykernel install --user --name python3
+      - run: python tools/run_notebooks_kernel.py --timeout 600 --report-dir kernel_runs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kernel-run-${{ matrix.os }}
+          path: kernel_runs/

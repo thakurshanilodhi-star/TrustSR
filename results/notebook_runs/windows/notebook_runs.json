@@ -1,0 +1,397 @@
+{
+  "meta": {
+    "started_utc": "2026-10-24T18:45:59+00:00",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "os": "Windows",
+    "executor": "plain exec() harness (not a Jupyter kernel)",
+    "timeout_per_notebook_s": 300,
+    "jobs": 1,
+    "total_notebook_seconds": 451.7
+  },
+  "results": [
+    {
+      "status": "PASS",
+      "seconds": 3.18,
+      "cells": 9,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [],
+      "notebook": "labs\\00_package\\TRUSTSR_Lab_00_Package_Quickstart.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.0,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_1_Missing_Edge_Failure_Test.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.1,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_2_Systematic_Missing_Edge_Experiments.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.44,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_3_Conservative_Unknown_Dependency_Handling.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.59,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        4
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_4_Ground_Truth_Independent_Uncertainty_Policy.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.34,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_5_Recovery_Strategy_Comparison.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.57,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_6_Randomized_Recovery_Evaluation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.94,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_7_Blind_Missing_Edge_Detection.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 8.09,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_8_Threshold_Sensitivity_and_Stress_Testing.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.16,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\01_contamination\\TRUSTSR_Lab_01_Memory_Poisoning_and_Contamination_Graph.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.64,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_01_Selective_Recovery_Prototype.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.05,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_02_Checkpoint_Integrity_and_Provenance.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.95,
+      "cells": 10,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3,
+        7
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_03_Signed_Checkpoint_Manifest.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.99,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_04_Checkpoint_Versioning_and_Replay_Protection.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.5,
+      "cells": 10,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_05_Concurrent_Checkpoints_Atomic_High_Water_Mark.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.84,
+      "cells": 11,
+      "cells_matching_saved": 10,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_06_SQLite_Transactional_Persistence_and_Restart_Recovery.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.09,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_07_Tamper_Evident_Audit_Trail.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.05,
+      "cells": 11,
+      "cells_matching_saved": 10,
+      "cells_differing_from_saved": [
+        4
+      ],
+      "notebook": "labs\\02_trusted_recovery\\TRUSTSR_Lab_02_FINAL_Integrated_Recovery_and_Audit_Validation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.46,
+      "cells": 9,
+      "cells_matching_saved": 8,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_01_Atomic_Checkpoint_and_Audit_Persistence.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.23,
+      "cells": 8,
+      "cells_matching_saved": 7,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_02_Failure_Recording_and_Recovery.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.22,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_03_Independent_Failure_Journal_and_Reconciliation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.04,
+      "cells": 6,
+      "cells_matching_saved": 5,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_04_Retry_Idempotency_and_Reconciliation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.4,
+      "cells": 5,
+      "cells_matching_saved": 4,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_05_Parameterized_Retry_Stress_Test.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.92,
+      "cells": 6,
+      "cells_matching_saved": 5,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_06_Correlated_Outages_and_Ambiguous_Timeouts.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 4.01,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        3
+      ],
+      "notebook": "labs\\03_reliability\\TRUSTSR_Lab_03_07_Final_Integrated_Reliability_Benchmark.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 4.16,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\04_evaluation\\TRUSTSR_Lab_04_01_Selective_Recovery_Effectiveness.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 7.78,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\04_evaluation\\TRUSTSR_Lab_04_02_Uncertainty_Aware_Recovery.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 25.65,
+      "cells": 7,
+      "cells_matching_saved": 4,
+      "cells_differing_from_saved": [
+        2,
+        8,
+        12
+      ],
+      "notebook": "labs\\04_evaluation\\TRUSTSR_Lab_04_03_Coverage_Signal_Robustness.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 4.06,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\04_evaluation\\TRUSTSR_Lab_04_Final_Adversarial_Observability_Stress_Test.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 3.24,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\05_execution\\TRUSTSR_Lab_05_Recovery_Execution_and_Independent_Verification.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.27,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\05_execution\\TRUSTSR_Lab_06_Recovery_Interruption_Retry_and_Idempotence.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 95.06,
+      "cells": 7,
+      "cells_matching_saved": 6,
+      "cells_differing_from_saved": [
+        2
+      ],
+      "notebook": "labs\\05_execution\\TRUSTSR_Lab_07_Persistent_Journal_and_Restart_Recovery.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 223.06,
+      "cells": 9,
+      "cells_matching_saved": 7,
+      "cells_differing_from_saved": [
+        2,
+        18
+      ],
+      "notebook": "labs\\05_execution\\TRUSTSR_Lab_08_Hard_Crash_Recovery_and_Integrity_Validation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 2.42,
+      "cells": 11,
+      "cells_matching_saved": 10,
+      "cells_differing_from_saved": [
+        12
+      ],
+      "notebook": "labs\\06_capstone\\TRUSTSR_Final_Capstone_Lab_12_Adaptive_Recovery_Trust_Reinstatement.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.78,
+      "cells": 6,
+      "cells_matching_saved": 5,
+      "cells_differing_from_saved": [
+        12
+      ],
+      "notebook": "labs\\06_capstone\\TRUSTSR_Lab_09_Trust_State_Model_and_Transition_Validation.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.82,
+      "cells": 6,
+      "cells_matching_saved": 4,
+      "cells_differing_from_saved": [
+        6,
+        12
+      ],
+      "notebook": "labs\\06_capstone\\TRUSTSR_Lab_10_Trust_State_Sequence_and_Invariant_Testing.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.72,
+      "cells": 8,
+      "cells_matching_saved": 5,
+      "cells_differing_from_saved": [
+        8,
+        12,
+        16
+      ],
+      "notebook": "labs\\06_capstone\\TRUSTSR_Lab_11_Recovery_Verification_Engine.ipynb"
+    },
+    {
+      "status": "PASS",
+      "seconds": 1.84,
+      "cells": 9,
+      "cells_matching_saved": 9,
+      "cells_differing_from_saved": [],
+      "notebook": "labs\\06_capstone\\TRUSTSR_Lab_13_Authenticated_Checkpoints_and_GroundTruth_Completeness.ipynb"
+    }
+  ]
+}

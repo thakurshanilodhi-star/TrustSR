@@ -1,0 +1,9 @@
+{
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "scenarios": 5,
+  "baseline_accuracy": 0.2,
+  "trustsr_accuracy": 1.0,
+  "seed": "not applicable: deterministic scenarios; cryptographic keys are ephemeral",
+  "limitations": "Tiny synthetic fixture set; no statistical inference or production claim."
+}

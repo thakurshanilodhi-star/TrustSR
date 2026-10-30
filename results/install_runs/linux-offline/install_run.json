@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "os": "Linux",
+    "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "mode": "offline (system site-packages, no fresh dependency resolution)",
+    "extras": "test",
+    "result": "PASS"
+  },
+  "steps": [
+    {
+      "step": "pip install (non-editable)",
+      "cmd": "/tmp/trustsr_venv_1nwwnbqt/venv/bin/python -m pip install --no-build-isolation --no-deps .",
+      "returncode": 0,
+      "seconds": 1.2,
+      "tail": "Processing /home/claude/work/TrustSR\n  Preparing metadata (pyproject.toml): started\n  Preparing metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: trustsr\n  Building wheel for trustsr (pyproject.toml): started\n  Building wheel for trustsr (pyproject.toml): finished with status 'done'\n  Created wheel for trustsr: filename=trustsr-0.3.0-py3-none-any.whl size=32774 sha256=ca8c02f6c998184c62ed42de6c041b91886cc6ff85016d666686646e19b67ff6\n  Stored in directory: /tmp/pip-ephem-wheel-cache-xxq313u5/wheels/ae/5d/c9/c7f1a87bd9bde1364b48da5f318fc091c20828ce01924eac02\nSuccessfully built trustsr\nInstalling collected packages: trustsr\nSuccessfully installed trustsr-0.3.0\n"
+    },
+    {
+      "cmd": "/tmp/trustsr_venv_1nwwnbqt/venv/bin/python -c import trustsr, sys; print(trustsr.__file__); print(trustsr.__version__)",
+      "returncode": 0,
+      "seconds": 0.0,
+      "tail": "/tmp/trustsr_venv_1nwwnbqt/venv/lib/python3.12/site-packages/trustsr/__init__.py\n0.3.0\n",
+      "step": "import from installed location"
+    },
+    {
+      "step": "README example against installed package",
+      "cmd": "/tmp/trustsr_venv_1nwwnbqt/venv/bin/python /tmp/trustsr_venv_1nwwnbqt/neutral/readme_example.py",
+      "returncode": 0,
+      "seconds": 0.1,
+      "tail": "README example OK\n"
+    },
+    {
+      "step": "package tests against installed package",
+      "returncode": null,
+      "tail": "SKIPPED: pytest is not installed in the venv (offline mode without pytest)"
+    }
+  ],
+  "pip_freeze": "=0.1.5\nmarko==2.1.2\nMarkupSafe==3.0.3\nmatplotlib==3.10.8\nmdurl==0.1.2\nmediapipe==0.10.33\nmergedeep==1.3.4\nmistune==3.2.0\nmkdocs==1.6.1\nmkdocs-get-deps==0.2.2\nmkdocs-material==9.7.6\nmkdocs-material-extensions==1.3.1\nmpmath==1.3.0\nnetworkx==3.6.1\nnumpy==2.4.4\noauthlib==3.2.2\nodfpy==1.4.1\nonnxruntime==1.24.4\nopencv-contrib-python==4.13.0.92\nopencv-python==4.13.0.92\nopencv-python-headless==4.13.0.92\nopenpyxl==3.1.5\npackaging==26.0\npaginate==0.5.7\npandas==3.0.2\npath-and-address==2.0.1\npathspec==1.0.4\npdf2image==1.17.0\npdfkit==1.0.0\npdfminer.six==20251230\npdfplumber==0.11.9\npikepdf==10.5.1\npillow==12.1.1\npipx==1.4.3\nplatformdirs==4.9.4\nplaywright==1.56.0\nprotobuf==7.34.1\npsutil==7.2.2\npycparser==3.0\npyee==13.0.1\nPygments==2.20.0\nPyGObject==3.48.2\nPyJWT==2.7.0\npymdown-extensions==10.21.2\npyoo==1.4\npyparsing==3.3.2\npypdf==5.9.0\npypdfium2==5.6.0\npytesseract==0.3.13\npython-apt==2.7.7+ubuntu5.2\npython-dateutil==2.9.0.post0\npython-docx==1.2.0\npython-dotenv==1.2.2\npython-pptx==1.0.2\nPyYAML==6.0.3\npyyaml_env_tag==1.1\nreportlab==4.4.10\nrequests==2.33.1\nscikit-image==0.26.0\nscikit-learn==1.8.0\nscipy==1.17.1\nseaborn==0.13.2\nsetuptools==68.1.2\nsix==1.17.0\nsounddevice==0.5.5\nsoupsieve==2.8.3\nsympy==1.14.0\ntabula-py==2.10.0\ntabulate==0.10.0\nthreadpoolctl==3.6.0\ntifffile==2026.3.3\ntrustsr @ file:///home/claude/work/TrustSR\ntyping_extensions==4.15.0\nunoserver==3.6\nurllib3==2.6.3\nuserpath==1.9.1\nwadllib==1.3.6\nWand==0.7.0\nwatchdog==6.0.0\nWerkzeug==3.1.7\nwheel==0.42.0\nwrapt==2.1.2\nxlsxwriter==3.2.9\n"
+}
