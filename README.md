@@ -3,7 +3,6 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,18,24,30&height=150&section=header" width="100%" alt="wave"/>
 
 
-
 <img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=6,12,18,24,30&height=3&section=header" width="100%" alt=""/>
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=36BCF7&center=true&vCenter=true&width=700&lines=Recovery+is+not+the+restoration+of+state.;Recovery+is+the+restoration+of+trust.;Fail-closed+%7C+Verified+%7C+Auditable)](https://github.com)
@@ -51,13 +50,13 @@ TrustSR explores a fail-closed recovery workflow for agent state: restore state 
 
 ```mermaid
 flowchart LR
-    A([Signed Checkpoint]):::blue --> B([Recover State]):::orange
-    B --> C([Audit Log]):::purple
-    C --> D([Compare with Signed Payload]):::teal
-    D --> E([Scope Check]):::pink
-    E --> F{{ All 5 Gates Pass?}}:::red
-    F --  Yes --> G([TRUSTED]):::green
-    F --  No --> H([FAIL / Quarantine]):::dark
+    A(["Signed Checkpoint"]):::blue --> B(["Recover State"]):::orange
+    B --> C(["Audit Log"]):::purple
+    C --> D(["Compare with Signed Payload"]):::teal
+    D --> E(["Scope Check"]):::pink
+    E --> F{{"All 5 Gates Pass?"}}:::red
+    F -->|Yes| G(["TRUSTED"]):::green
+    F -->|No| H(["FAIL / Quarantine"]):::dark
     classDef blue fill:#0ea5e9,stroke:#0369a1,color:#fff;
     classDef orange fill:#f97316,stroke:#c2410c,color:#fff;
     classDef purple fill:#8b5cf6,stroke:#5b21b6,color:#fff;
@@ -397,13 +396,13 @@ TrustSR treats trust as a recovery objective rather than an assumption.
 
 ```mermaid
 flowchart TD
-    A([Compromise]):::red --> B([Detection]):::orange
-    B --> C([Contamination Analysis]):::yellow
-    C --> D([Trust Classification]):::lime
-    D --> E([Selective Recovery]):::green
-    E --> F([Audit Validation]):::teal
-    F --> G([Recovery Verification]):::blue
-    G --> H([Trusted State]):::purple
+    A(["Compromise"]):::red --> B(["Detection"]):::orange
+    B --> C(["Contamination Analysis"]):::yellow
+    C --> D(["Trust Classification"]):::lime
+    D --> E(["Selective Recovery"]):::green
+    E --> F(["Audit Validation"]):::teal
+    F --> G(["Recovery Verification"]):::blue
+    G --> H(["Trusted State"]):::purple
     classDef red fill:#ef4444,stroke:#991b1b,color:#fff;
     classDef orange fill:#f97316,stroke:#9a3412,color:#fff;
     classDef yellow fill:#eab308,stroke:#854d0e,color:#000;
