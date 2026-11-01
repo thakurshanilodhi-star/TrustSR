@@ -1,39 +1,92 @@
-Samajh gaya bro, ab bilkul *same to same* content hai, ek word bhi change nahi kiya. Bas upar-neeche colour ke liye banner, badges aur typing animation add kiya hai. GitHub pe yahi colour dikhega.
+<div align="center">
 
-Isko copy karke paste kar de:
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=220&section=header&text=TrustSR&fontSize=75&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Trust-Aware%20State%20Recovery&descAlignY=58" />
-</p>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,18,24,30&height=150&section=header" width="100%" alt="wave"/>
 
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=36BCF7&center=true&vCenter=true&width=900&lines=Recovery+is+not+merely+restoring+state...;it+is+verifying+whether+trust+can+be+reinstated.;Trust-Aware+State+Recovery+v0.3.0" />
-</p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Version-v0.3.0-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Research-Prototype-orange?style=for-the-badge&logo=flask" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Fail_Closed-Design-red?style=for-the-badge&logo=security" />
-</p>
 
----
-# TrustSR
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=6,12,18,24,30&height=3&section=header" width="100%" alt=""/>
 
-**Trust-Aware State Recovery — research prototype **
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=36BCF7&center=true&vCenter=true&width=700&lines=Recovery+is+not+the+restoration+of+state.;Recovery+is+the+restoration+of+trust.;Fail-closed+%7C+Verified+%7C+Auditable)](https://github.com)
+
+![Version](https://img.shields.io/badge/version-1-ff6b6b?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-research%20prototype-f59e0b?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=ffd43b)
+![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-supported-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Ed25519](https://img.shields.io/badge/Ed25519-signed-8b5cf6?style=for-the-badge)
+![Fail Closed](https://img.shields.io/badge/design-fail--closed-ef4444?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,18&height=6&section=header" width="100%" alt=""/>
+
+<div align="center">
+
+### Quick Navigation (click to jump)
+
+[![Part 1](https://img.shields.io/badge/PART%201-TrustSR%20Prototype%20v1-0ea5e9?style=for-the-badge)](#part-1--trustsr)
+[![Part 2](https://img.shields.io/badge/PART%202-Why%20Rollback%20Is%20Not%20Recovery-d946ef?style=for-the-badge)](#part-2--trustsr-why-rollback-is-not-recovery)
+
+[![Install](https://img.shields.io/badge/Go%20to-Install%20%26%20Run-22c55e?style=flat-square)](#install-and-run--windows-first)
+[![Example](https://img.shields.io/badge/Go%20to-Minimal%20Example-f97316?style=flat-square)](#minimal-example)
+[![Modules](https://img.shields.io/badge/Go%20to-Modules-3b82f6?style=flat-square)](#modules-srctrustsr)
+[![Gates](https://img.shields.io/badge/Go%20to-Verification%20Gates-ef4444?style=flat-square)](#verification-gates)
+[![Labs](https://img.shields.io/badge/Go%20to-Laboratory%20Series-a855f7?style=flat-square)](#laboratory-series)
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,18,24&height=6&section=header" width="100%" alt=""/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18,24,0&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://img.shields.io/badge/PART%201-TrustSR%20Research%20Prototype-0ea5e9?style=for-the-badge&labelColor=0369a1" alt="part 1"/>
+
+# PART 1 — TrustSR
+
+### **Trust-Aware State Recovery — research prototype (v1)**
 
 TrustSR explores a fail-closed recovery workflow for agent state: restore state only from a cryptographically verified (and non-replayed) checkpoint, audit the recovery, compare the result with the *signed* checkpoint, check a declared scope, and reinstate trust only when every required gate passes.
 
-> Recovery is not merely restoring state; it is verifying whether trust can be reinstated.
+>  Recovery is not merely restoring state; it is verifying whether trust can be reinstated.
+
+```mermaid
+flowchart LR
+    A([Signed Checkpoint]):::blue --> B([Recover State]):::orange
+    B --> C([Audit Log]):::purple
+    C --> D([Compare with Signed Payload]):::teal
+    D --> E([Scope Check]):::pink
+    E --> F{{ All 5 Gates Pass?}}:::red
+    F --  Yes --> G([TRUSTED]):::green
+    F --  No --> H([FAIL / Quarantine]):::dark
+    classDef blue fill:#0ea5e9,stroke:#0369a1,color:#fff;
+    classDef orange fill:#f97316,stroke:#c2410c,color:#fff;
+    classDef purple fill:#8b5cf6,stroke:#5b21b6,color:#fff;
+    classDef teal fill:#14b8a6,stroke:#0f766e,color:#fff;
+    classDef pink fill:#ec4899,stroke:#9d174d,color:#fff;
+    classDef red fill:#ef4444,stroke:#991b1b,color:#fff;
+    classDef green fill:#22c55e,stroke:#15803d,color:#fff;
+    classDef dark fill:#374151,stroke:#111827,color:#fff;
+```
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,16&height=10&section=header" width="100%" alt=""/>
 
 ## Status
 
 Early research prototype. Tests use synthetic state and ephemeral keys. This repository does not establish production effectiveness, universal correctness, or real-world telemetry completeness. See `CHANGELOG.md` for what changed and `docs/limitations.md` for what is not solved.
 
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,0,6&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,17,22&height=10&section=header" width="100%" alt=""/>
+
 ## Install and run — Windows first
 
 Your Windows Command Prompt path is shown exactly as requested: `C:\Users\shani>`.
 Do not copy this Windows prompt into a Linux run record. Linux instructions and reports must name the actual Linux environment used.
+
+<details open>
+<summary><b>Windows 10/11 — Command Prompt (<code>cmd.exe</code>) &nbsp;— click to expand / collapse</b></summary>
+
+<br>
 
 ### Windows 10/11 — Command Prompt (`cmd.exe`)
 
@@ -50,13 +103,28 @@ C:\Users\shani> .venv\Scripts\python.exe tools\run_notebooks.py --timeout 300 --
 C:\Users\shani> .venv\Scripts\python.exe tools\run_notebooks_kernel.py --timeout 600
 C:\Users\shani> .venv\Scripts\python.exe tools\verify_install.py --extras test,labs
 C:\Users\shani> .venv\Scripts\python.exe tools\check_references.py
+```
+
 If you extracted the project directly to `C:\Users\shani\TrustSR`, use this first command instead:
+
+```bat
 C:\Users\shani> cd /d C:\Users\shani\TrustSR
+```
+
 If `py -3.12` is not installed, check `py --list` or use `python` for the Python version you have installed. Python 3.10+ is required. Reference checking requires internet access. Notebook execution may take several minutes; do not treat a timeout as a pass.
+
+</details>
+
+<details open>
+<summary><b>Linux &nbsp;— click to expand / collapse</b></summary>
+
+<br>
 
 ### Linux
 
 Run these commands from the extracted repository directory. They intentionally use the actual Linux shell prompt/environment, not the Windows path above.
+
+```bash
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install --upgrade pip
@@ -67,18 +135,40 @@ python tools/run_notebooks.py --timeout 300 --jobs 1
 python tools/run_notebooks_kernel.py --timeout 600
 python tools/verify_install.py --extras test,labs
 python tools/check_references.py
+```
+
+</details>
+
+<details open>
+<summary><b>What each check proves &nbsp;— click to expand / collapse</b></summary>
+
+<br>
+
 ### What each check proves
 
 - `python -m pytest -q`: unit and regression tests; notebook tests are excluded by default.
 - `python -m pytest -q -m notebook`: notebook smoke tests through the test harness.
-- `tools/run_notebooks.py`: executes code cells in a plain-Python subprocess harness; *not* a Jupyter kernel.
+- `tools/run_notebooks.py`: executes code cells in a plain-Python subprocess harness; **not** a Jupyter kernel.
 - `tools/run_notebooks_kernel.py`: executes notebooks in a real Jupyter kernel.
 - `tools/verify_install.py`: creates a fresh virtual environment and verifies a non-editable package install; online dependency resolution requires network access.
 - `tools/check_references.py`: checks reference metadata against Crossref; requires internet access.
 
 Run notebook checks separately if the combined run takes too long. A timeout is an incomplete result, not a pass. Each run record must include OS, Python version, dependency versions, exact command, exit code, and raw output. Never copy a Linux run record into the Windows results folder or vice versa.
 
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=30,6,12&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18,23,28&height=10&section=header" width="100%" alt=""/>
+
 ## Minimal example
+
+<details open>
+<summary><b>Full Python example &nbsp;— click to expand / collapse</b></summary>
+
+<br>
+
+```python
 import os, tempfile
 from trustsr.anchor import SignedHeadAnchor
 from trustsr.audit import AuditLog
@@ -130,40 +220,97 @@ binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_re
 assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
                                                "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
 assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED
+```
+
+</details>
+
 Pass `keys=[...]` to both `recover_state` and `verify_recovery` for selective recovery (only those keys are verified). Use `SqliteHighWaterMark(path)` for a transactional mark that survives restart, and store the replay mark out-of-band too.
 
-*Why the anchor matters.* `trusted_audit_head=log.head` is circular: the head is read from the log being checked, so a wholesale-rewritten log trivially matches itself. Three anchors share one contract (`load()` / `advance(log)`): `HeadAnchor` (plain local file, *not* independent), `SignedHeadAnchor` (records signed by a separate authority key; the verifier holds only the public key), and `anchor_service.AnchorServer` / `RemoteHeadAnchor` (the same signed anchor behind a small HTTP service, so the head lives under another OS account or host). `advance()` refuses a log that does not extend the stored head; `load(min_sequence=...)` detects a restored older file. Independence is a deployment property: see `docs/anchor_deployment.md`. If no head is supplied the report says so (`audit_head_anchored: False`, `warnings`); `require_anchored_head=True` makes that a failure and promotion requires an anchored report by default.
+<details>
+<summary><b>Why the anchor matters &nbsp;— click to expand</b></summary>
 
-*Why a passing report is not enough.* A passing report says an in-memory dictionary matched the signed checkpoint; it does not say the agent's _persistent_ state is that dictionary. `SqliteStateStore.commit_recovery` writes the recovered state, its `recovery_id` and digest in one transaction, re-reads it and recomputes the digest. `verify_recovery(recovered_state=<state re-read from the store>, recovery_id=...)` records `recovery_id` (taken from the audit log) and `verified_state_sha256` in the report, and `promote_after_verification` now *requires* `expected_checkpoint_sha256`, `expected_recovery_id` and `committed_state_sha256` (a fresh re-read digest). A report for another checkpoint, another recovery attempt, or state that changed afterwards cannot promote.
+<br>
 
-*Initial state invariant.* `TrustTracker(TrustLabel.TRUSTED)` raises `ValueError`; a tracker cannot begin trusted without passing the promotion flow.
+**Why the anchor matters.** `trusted_audit_head=log.head` is circular: the head is read from the log being checked, so a wholesale-rewritten log trivially matches itself. Three anchors share one contract (`load()` / `advance(log)`): `HeadAnchor` (plain local file, **not** independent), `SignedHeadAnchor` (records signed by a separate authority key; the verifier holds only the public key), and `anchor_service.AnchorServer` / `RemoteHeadAnchor` (the same signed anchor behind a small HTTP service, so the head lives under another OS account or host). `advance()` refuses a log that does not extend the stored head; `load(min_sequence=...)` detects a restored older file. Independence is a deployment property: see `docs/anchor_deployment.md`. If no head is supplied the report says so (`audit_head_anchored: False`, `warnings`); `require_anchored_head=True` makes that a failure and promotion requires an anchored report by default.
 
-*Why promotion is bound to the report.* `verify_recovery` returns an immutable, sealed `VerificationReport`. `TrustTracker.promote_after_verification` rejects plain dicts, edited or copied reports, reports already used, unanchored reports, and reports not bound to the given checkpoint, recovery attempt and committed state (all three bindings are mandatory); it re-derives the decision from the five gates instead of trusting the `decision` string, and `TrustTracker.apply()` cannot enter `Trusted` at all. This is an in-process integrity seal, not a security boundary.
+</details>
+
+<details>
+<summary><b>Why a passing report is not enough &nbsp;— click to expand</b></summary>
+
+<br>
+
+**Why a passing report is not enough.** A passing report says an in-memory dictionary matched the signed checkpoint; it does not say the agent's *persistent* state is that dictionary. `SqliteStateStore.commit_recovery` writes the recovered state, its `recovery_id` and digest in one transaction, re-reads it and recomputes the digest. `verify_recovery(recovered_state=<state re-read from the store>, recovery_id=...)` records `recovery_id` (taken from the audit log) and `verified_state_sha256` in the report, and `promote_after_verification` now **requires** `expected_checkpoint_sha256`, `expected_recovery_id` and `committed_state_sha256` (a fresh re-read digest). A report for another checkpoint, another recovery attempt, or state that changed afterwards cannot promote.
+
+</details>
+
+<details>
+<summary><b>Initial state invariant &nbsp;— click to expand</b></summary>
+
+<br>
+
+**Initial state invariant.** `TrustTracker(TrustLabel.TRUSTED)` raises `ValueError`; a tracker cannot begin trusted without passing the promotion flow.
+
+</details>
+
+<details>
+<summary><b>Why promotion is bound to the report &nbsp;— click to expand</b></summary>
+
+<br>
+
+**Why promotion is bound to the report.** `verify_recovery` returns an immutable, sealed `VerificationReport`. `TrustTracker.promote_after_verification` rejects plain dicts, edited or copied reports, reports already used, unanchored reports, and reports not bound to the given checkpoint, recovery attempt and committed state (all three bindings are mandatory); it re-derives the decision from the five gates instead of trusting the `decision` string, and `TrustTracker.apply()` cannot enter `Trusted` at all. This is an in-process integrity seal, not a security boundary.
+
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,6,12&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,29,4&height=10&section=header" width="100%" alt=""/>
 
 ## Modules (`src/trustsr/`)
-Module | Purpose
-`checkpoint.py` | Canonical JSON, Ed25519 signing/verification, optional signed `version`
-`replay.py` | `HighWaterMark` / `SqliteHighWaterMark`: refuse stale or replayed checkpoints
-`recovery.py` | Full (replacing) or selective recovery, optional audit logging and replay guard
-`audit.py` | Hash-chained audit log: non-empty, trusted-head check, scope-manifest binding
-`anchor.py` | `HeadAnchor`, `SignedHeadAnchor`: store/load the audit head out-of-band; refuse non-extending logs
-`anchor_service.py` | `AnchorServer` / `RemoteHeadAnchor`: signed anchor in a separate process/host
-`state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for promotion
-`contamination.py` | Exact key/value comparison against a reference
-`graph.py` | Dependency-graph contamination with a declared uncertainty boundary (Lab 01.4)
-`verification.py` | The five gates and the PASS/FAIL decision, issued as a sealed `VerificationReport`
-`trust_state.py` | Three decision states (`UNKNOWN`, `TRUSTED`, `QUARANTINED`)
-`trust_machine.py` | Five-label state machine; `TrustTracker` promotes only from an authentic, unused report (Lab 09)
-`idempotent.py` | Idempotent event receiver and reconciliation (Labs 03.04-03.07)
+
+| Module | Purpose |
+|---|---|
+| `checkpoint.py` | Canonical JSON, Ed25519 signing/verification, optional signed `version` |
+| `replay.py` | `HighWaterMark` / `SqliteHighWaterMark`: refuse stale or replayed checkpoints |
+| `recovery.py` | Full (replacing) or selective recovery, optional audit logging and replay guard |
+| `audit.py` | Hash-chained audit log: non-empty, trusted-head check, scope-manifest binding |
+| `anchor.py` | `HeadAnchor`, `SignedHeadAnchor`: store/load the audit head out-of-band; refuse non-extending logs |
+| `anchor_service.py` | `AnchorServer` / `RemoteHeadAnchor`: signed anchor in a separate process/host |
+| `state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for promotion |
+| `contamination.py` | Exact key/value comparison against a reference |
+| `graph.py` | Dependency-graph contamination with a declared uncertainty boundary (Lab 01.4) |
+| `verification.py` | The five gates and the PASS/FAIL decision, issued as a sealed `VerificationReport` |
+| `trust_state.py` | Three decision states (`UNKNOWN`, `TRUSTED`, `QUARANTINED`) |
+| `trust_machine.py` | Five-label state machine; `TrustTracker` promotes only from an authentic, unused report (Lab 09) |
+| `idempotent.py` | Idempotent event receiver and reconciliation (Labs 03.04-03.07) |
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=8,14,20&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=30,5,10&height=10&section=header" width="100%" alt=""/>
+
 ## Verification gates
 
-1. *checkpoint_valid* – signature and digest verify under the trusted key; with a `replay_guard`, the signed version is present and not older than the high-water mark (unless `allow_rollback=True`).
-2. *audit_valid* – the audit chain is non-empty and consistent (and equals `trusted_audit_head` if supplied).
-3. *recovery_complete* – derived from the audit log: a matching started/completed pair for this checkpoint, version and key scope, with no refusal.
-4. *contamination_removed* – the recovered state equals the *signed checkpoint payload* (restricted to `keys` for selective recovery).
-5. *scope_complete* – observed record IDs match the manifest exactly and the manifest digest was recorded in the audit log.
+<div align="center">
+
+![Gate1](https://img.shields.io/badge/1-checkpoint__valid-0ea5e9?style=for-the-badge)
+![Gate2](https://img.shields.io/badge/2-audit__valid-8b5cf6?style=for-the-badge)
+![Gate3](https://img.shields.io/badge/3-recovery__complete-f97316?style=for-the-badge)
+![Gate4](https://img.shields.io/badge/4-contamination__removed-ef4444?style=for-the-badge)
+![Gate5](https://img.shields.io/badge/5-scope__complete-22c55e?style=for-the-badge)
+
+</div>
+
+1. **checkpoint_valid** – signature and digest verify under the trusted key; with a `replay_guard`, the signed version is present and not older than the high-water mark (unless `allow_rollback=True`).
+2. **audit_valid** – the audit chain is non-empty and consistent (and equals `trusted_audit_head` if supplied).
+3. **recovery_complete** – derived from the audit log: a matching started/completed pair for this checkpoint, version and key scope, with no refusal.
+4. **contamination_removed** – the recovered state equals the **signed checkpoint payload** (restricted to `keys` for selective recovery).
+5. **scope_complete** – observed record IDs match the manifest exactly and the manifest digest was recorded in the audit log.
 
 A missing or failed gate yields `FAIL`; `TRUSTED` requires all five. The scope gate checks consistency with a declared manifest; it does not prove real-world completeness.
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=14,20,26&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,5,10&height=10&section=header" width="100%" alt=""/>
 
 ## Repository layout
 
@@ -171,37 +318,64 @@ A missing or failed gate yields `FAIL`; `TRUSTED` requires all five. The scope g
 - `labs/` – 37 research notebooks with saved synthetic outputs, plus `00_package` which uses the package. See `labs/README.md` and `labs/CHANGES.md`.
 - `datasets/synthetic/` – declared synthetic scenarios. `results/sample_runs/` – recorded test runs.
 
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,26,2&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=8,13,18&height=10&section=header" width="100%" alt=""/>
+
 ## Research integrity
 
 Do not report synthetic fixtures as real-agent experiments. Record Python version, dependency versions, commands, raw output, and deviations for each run. Notebook outputs in this archive were produced by a plain-Python harness, not a Jupyter kernel (see `labs/CHANGES.md`); `tools/run_notebooks.py` re-executes them and compares with the saved text. Re-run in your own environment (ideally with `jupyter nbconvert --execute`) before citing numbers. Run `python experiments/run_synthetic_evaluation.py` to generate a small, explicitly synthetic baseline comparison CSV. It is a test harness, not evidence of real-agent effectiveness. See `docs/evaluation_protocol.md` and `docs/references.md`. Claims about baseline superiority, causal recovery, or production readiness require additional experiments.
 
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=26,2,8&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=14,19,24&height=10&section=header" width="100%" alt=""/>
+
 ## CI and release checklist
 
-`.github/workflows/tests.yml` runs, on `ubuntu-latest` *and* `windows-latest`: the fast suite (Python 3.10 and 3.12), a fresh-venv install check, the notebook suite with the plain harness, and the notebook suite in a real Jupyter kernel.
+`.github/workflows/tests.yml` runs, on `ubuntu-latest` **and** `windows-latest`: the fast suite (Python 3.10 and 3.12), a fresh-venv install check, the notebook suite with the plain harness, and the notebook suite in a real Jupyter kernel.
 
 Verification status is recorded separately per environment in `results/sample_runs/`; the latest actual Linux pytest run is `results/sample_runs/run_v0.3.0_linux_actual_pytest.md`. Windows remains pending until a Windows run or green Windows CI log is recorded. Do not treat CI configuration or valid notebook JSON as a successful execution result: a job counts only when its run record or CI log exists. Windows, a real `pytest` run, a networked fresh-venv install and a Jupyter-kernel run are listed there as pending unless a record says otherwise.
 
-# TrustSR: Why Rollback Is Not Recovery
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,24,30&height=6&section=header" width="100%" alt="divider"/>
+
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,18&height=6&section=header" width="100%" alt=""/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,18,24&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://img.shields.io/badge/PART%202-Why%20Rollback%20Is%20Not%20Recovery-d946ef?style=for-the-badge&labelColor=86198f" alt="part 2"/>
+
+# PART 2 — TrustSR: Why Rollback Is Not Recovery
 
 TrustSR (Trust-Aware State Recovery) is a research-oriented framework that explores trusted recovery for long-horizon AI agent systems.
 
 Traditional recovery mechanisms focus on rollback, assuming that reverting to an earlier checkpoint is sufficient after compromise. TrustSR investigates a different question:
 
-> How can an AI system recover to a state that is demonstrably trustworthy, rather than simply reverting to an earlier state?
+>  How can an AI system recover to a state that is demonstrably trustworthy, rather than simply reverting to an earlier state?
 
 The project combines contamination analysis, selective recovery, trust-state modeling, verification pipelines, audit mechanisms, authenticated checkpoints, and reproducible laboratory experiments.
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18,24,0&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,25,0&height=10&section=header" width="100%" alt=""/>
 
 ## Core Idea
 
 Traditional recovery:
+
+```text
 Compromise
 ↓
 Rollback
 ↓
 Resume
+```
+
 TrustSR:
+
+```text
 Compromise
 ↓
 Detection
@@ -217,9 +391,32 @@ Audit Validation
 Recovery Verification
 ↓
 Trusted State
+```
+
 TrustSR treats trust as a recovery objective rather than an assumption.
 
----
+```mermaid
+flowchart TD
+    A([Compromise]):::red --> B([Detection]):::orange
+    B --> C([Contamination Analysis]):::yellow
+    C --> D([Trust Classification]):::lime
+    D --> E([Selective Recovery]):::green
+    E --> F([Audit Validation]):::teal
+    F --> G([Recovery Verification]):::blue
+    G --> H([Trusted State]):::purple
+    classDef red fill:#ef4444,stroke:#991b1b,color:#fff;
+    classDef orange fill:#f97316,stroke:#9a3412,color:#fff;
+    classDef yellow fill:#eab308,stroke:#854d0e,color:#000;
+    classDef lime fill:#84cc16,stroke:#3f6212,color:#000;
+    classDef green fill:#22c55e,stroke:#166534,color:#fff;
+    classDef teal fill:#14b8a6,stroke:#115e59,color:#fff;
+    classDef blue fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+    classDef purple fill:#a855f7,stroke:#581c87,color:#fff;
+```
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,0,6&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=26,1,6&height=10&section=header" width="100%" alt=""/>
 
 ## Problem Statement
 
@@ -243,9 +440,16 @@ When compromise occurs, rollback may not be sufficient because:
 
 TrustSR explores mechanisms for recovering to a trusted operational state.
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=30,6,12&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,16&height=10&section=header" width="100%" alt=""/>
 
 ## Framework Components
+
+<details open>
+<summary><b>Contamination Analysis</b></summary>
+
+<br>
 
 ### Contamination Analysis
 
@@ -259,32 +463,68 @@ Topics:
 - Uncertainty-aware recovery
 - Adversarial observability gaps
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,6,12&height=6&section=header" width="100%" alt=""/>
+
+<details open>
+<summary><b>Selective Recovery</b></summary>
+
+<br>
 
 ### Selective Recovery
 
 Instead of restoring everything:
+
+```text
 Rollback:
 Restore entire checkpoint
+```
+
 TrustSR attempts:
+
+```text
 Restore only affected components
 Preserve unaffected work
+```
+
 Goals:
 
 - Reduce recovery cost
 - Preserve clean progress
 - Maintain trust guarantees
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=8,14,20&height=6&section=header" width="100%" alt=""/>
+
+<details open>
+<summary><b>Trust-State Model</b></summary>
+
+<br>
 
 ### Trust-State Model
 
 TrustSR defines explicit recovery states:
+
+```text
 Trusted
 Recovered
 Unknown
 Suspect
 Contaminated
+```
+
+<div align="center">
+
+![Trusted](https://img.shields.io/badge/Trusted-22c55e?style=for-the-badge)
+![Recovered](https://img.shields.io/badge/Recovered-3b82f6?style=for-the-badge)
+![Unknown](https://img.shields.io/badge/Unknown-9ca3af?style=for-the-badge)
+![Suspect](https://img.shields.io/badge/Suspect-f59e0b?style=for-the-badge)
+![Contaminated](https://img.shields.io/badge/Contaminated-ef4444?style=for-the-badge)
+
+</div>
+
 Key principles:
 
 - Recovered is not automatically Trusted
@@ -292,11 +532,40 @@ Key principles:
 - Unknown is not treated as clean
 - Contaminated states cannot directly become Trusted
 
----
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Unknown
+    Unknown --> Suspect
+    Suspect --> Contaminated
+    Contaminated --> Recovered
+    Recovered --> Trusted: all gates PASS
+    classDef t fill:#22c55e,color:#fff
+    classDef r fill:#3b82f6,color:#fff
+    classDef u fill:#9ca3af,color:#fff
+    classDef s fill:#f59e0b,color:#fff
+    classDef c fill:#ef4444,color:#fff
+    class Trusted t
+    class Recovered r
+    class Unknown u
+    class Suspect s
+    class Contaminated c
+```
+
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=14,20,26&height=6&section=header" width="100%" alt=""/>
+
+<details open>
+<summary><b>Verification Engine</b></summary>
+
+<br>
 
 ### Verification Engine
 
 Recovery is considered successful only if all verification gates pass:
+
+```text
 Checkpoint Validation
 +
 Audit Validation
@@ -306,11 +575,24 @@ Recovery Completion
 Contamination Removal
 =
 PASS
+```
+
 Otherwise:
+
+```text
 FAIL
+```
+
 TrustSR follows a fail-closed design.
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,26,2&height=6&section=header" width="100%" alt=""/>
+
+<details open>
+<summary><b>Authenticated Recovery</b></summary>
+
+<br>
 
 ### Authenticated Recovery
 
@@ -323,7 +605,14 @@ TrustSR explores:
 - Signature verification
 - Recovery provenance
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=26,2,8&height=6&section=header" width="100%" alt=""/>
+
+<details open>
+<summary><b>Audit and Evidence</b></summary>
+
+<br>
 
 ### Audit and Evidence
 
@@ -337,11 +626,35 @@ TrustSR includes mechanisms for:
 
 Recovery actions should be explainable and reviewable.
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,18&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,17,22&height=10&section=header" width="100%" alt=""/>
 
 ## Laboratory Series
 
 The repository includes a complete set of reproducible experimental notebooks.
+
+<div align="center">
+
+![Lab01](https://img.shields.io/badge/Lab%2001-Contamination-ef4444?style=for-the-badge)
+![Lab02](https://img.shields.io/badge/Lab%2002-Trusted%20Recovery-f97316?style=for-the-badge)
+![Lab03](https://img.shields.io/badge/Lab%2003-Reliability-eab308?style=for-the-badge)
+![Lab04](https://img.shields.io/badge/Lab%2004-Evaluation-22c55e?style=for-the-badge)
+![Lab05](https://img.shields.io/badge/Lab%2005-Execution-14b8a6?style=for-the-badge)
+![Lab09](https://img.shields.io/badge/Lab%2009-Trust%20State-3b82f6?style=for-the-badge)
+![Lab10](https://img.shields.io/badge/Lab%2010-Invariants-6366f1?style=for-the-badge)
+![Lab11](https://img.shields.io/badge/Lab%2011-Verification-a855f7?style=for-the-badge)
+![Lab12](https://img.shields.io/badge/Lab%2012-Capstone-ec4899?style=for-the-badge)
+![Lab13](https://img.shields.io/badge/Lab%2013-Auth%20Checkpoints-f43f5e?style=for-the-badge)
+
+</div>
+
+<details>
+<summary><b>Lab 01 Series — Contamination Analysis</b></summary>
+
+<br>
 
 ### Lab 01 Series
 
@@ -353,6 +666,13 @@ Contamination Analysis
 - Uncertainty handling
 - Robustness studies
 
+</details>
+
+<details>
+<summary><b>Lab 02 Series — Trusted Recovery Foundations</b></summary>
+
+<br>
+
 ### Lab 02 Series
 
 Trusted Recovery Foundations
@@ -362,6 +682,13 @@ Trusted Recovery Foundations
 - Signature validation
 - Replay protection
 - Transactional persistence
+
+</details>
+
+<details>
+<summary><b>Lab 03 Series — Reliability and Recovery Infrastructure</b></summary>
+
+<br>
 
 ### Lab 03 Series
 
@@ -373,6 +700,13 @@ Reliability and Recovery Infrastructure
 - Reconciliation
 - Hard crash recovery
 
+</details>
+
+<details>
+<summary><b>Lab 04 Series — Recovery Evaluation</b></summary>
+
+<br>
+
 ### Lab 04 Series
 
 Recovery Evaluation
@@ -382,6 +716,13 @@ Recovery Evaluation
 - Adversarial observability attacks
 - Policy benchmarks
 
+</details>
+
+<details>
+<summary><b>Lab 05 Series — Recovery Execution</b></summary>
+
+<br>
+
 ### Lab 05 Series
 
 Recovery Execution
@@ -389,6 +730,13 @@ Recovery Execution
 - End-to-end recovery execution
 - Recovery interruption
 - Resume and completion
+
+</details>
+
+<details>
+<summary><b>Lab 09 / 10 / 11 / 12 / 13</b></summary>
+
+<br>
 
 ### Lab 09
 
@@ -420,9 +768,20 @@ Authenticated Checkpoints and Inventory Validation
 
 Cryptographic verification and recovery-scope validation.
 
----
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,18,24&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18,23,28&height=10&section=header" width="100%" alt=""/>
 
 ## Repository Structure
+
+<details>
+<summary><b>Click to expand the full tree</b></summary>
+
+<br>
+
+```text
 TrustSR/
 │
 ├── README.md
@@ -535,7 +894,13 @@ TrustSR/
     ├── quick_start/
     ├── tutorial/
     └── sample_runs/
----
+```
+
+</details>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18,24,0&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,29,4&height=10&section=header" width="100%" alt=""/>
 
 ## Research Goals
 
@@ -549,7 +914,9 @@ TrustSR investigates the following questions:
 6. How can recovery evidence be audited?
 7. What assumptions are required for trusted recovery?
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,0,6&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=30,5,10&height=10&section=header" width="100%" alt=""/>
 
 ## Limitations
 
@@ -567,7 +934,9 @@ Current limitations include:
 
 TrustSR should be viewed as a research framework prototype and learning resource.
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=30,6,12&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,5,10&height=10&section=header" width="100%" alt=""/>
 
 ## Intended Audience
 
@@ -578,16 +947,24 @@ TrustSR should be viewed as a research framework prototype and learning resource
 - Distributed Systems Engineers
 - Trust and Safety Practitioners
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,6,12&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=8,13,18&height=10&section=header" width="100%" alt=""/>
 
 ## Citation
 
 If you use TrustSR in academic, research, or educational work, please cite the framework and repository.
+
+```text
 TrustSR: Why Rollback Is Not Recovery
 Trust-Aware State Recovery Framework
 Author: [Shani]
 Year: 2026
----
+```
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=8,14,20&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=14,19,24&height=10&section=header" width="100%" alt=""/>
 
 ## License
 
@@ -595,7 +972,9 @@ MIT License
 
 See LICENSE for details.
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=14,20,26&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,25,0&height=10&section=header" width="100%" alt=""/>
 
 ## Author
 
@@ -605,7 +984,9 @@ B.Tech CSE (Artificial Intelligence & Machine Learning)
 
 TrustSR is an independent educational and research project exploring trust-aware recovery for AI agent systems.
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,26,2&height=6&section=header" width="100%" alt=""/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=26,1,6&height=10&section=header" width="100%" alt=""/>
 
 ## Motto
 
@@ -613,7 +994,15 @@ TrustSR is an independent educational and research project exploring trust-aware
 >
 > Recovery is the restoration of trust.
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=120&section=footer&text=Recovery%20is%20the%20restoration%20of%20trust.&fontSize=20&fontColor=ffffff&animation=fadeIn" />
-</p>
+<br>
 
+<div align="center">
+
+![Made with](https://img.shields.io/badge/Made%20with-Python-ff4d6d?style=for-the-badge&logo=python&logoColor=ffd43b)
+![Research](https://img.shields.io/badge/Research-Trust--Aware%20Recovery-8b5cf6?style=for-the-badge)
+![Author](https://img.shields.io/badge/Author-Shani-0ea5e9?style=for-the-badge)
+
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,18,24,30&height=160&section=footer" width="100%" alt="footer"/>
+
+</div>
