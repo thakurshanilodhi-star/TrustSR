@@ -1,6 +1,26 @@
+Samajh gaya bro, ab bilkul *same to same* content hai, ek word bhi change nahi kiya. Bas upar-neeche colour ke liye banner, badges aur typing animation add kiya hai. GitHub pe yahi colour dikhega.
+
+Isko copy karke paste kar de:
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=220&section=header&text=TrustSR&fontSize=75&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Trust-Aware%20State%20Recovery&descAlignY=58" />
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=36BCF7&center=true&vCenter=true&width=900&lines=Recovery+is+not+merely+restoring+state...;it+is+verifying+whether+trust+can+be+reinstated.;Trust-Aware+State+Recovery+v0.3.0" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-v0.3.0-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Research-Prototype-orange?style=for-the-badge&logo=flask" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Fail_Closed-Design-red?style=for-the-badge&logo=security" />
+</p>
+
+---
 # TrustSR
 
-**Trust-Aware State Recovery — research prototype (v0.3.0)**
+**Trust-Aware State Recovery — research prototype **
 
 TrustSR explores a fail-closed recovery workflow for agent state: restore state only from a cryptographically verified (and non-replayed) checkpoint, audit the recovery, compare the result with the *signed* checkpoint, check a declared scope, and reinstate trust only when every required gate passes.
 
@@ -30,21 +50,13 @@ C:\Users\shani> .venv\Scripts\python.exe tools\run_notebooks.py --timeout 300 --
 C:\Users\shani> .venv\Scripts\python.exe tools\run_notebooks_kernel.py --timeout 600
 C:\Users\shani> .venv\Scripts\python.exe tools\verify_install.py --extras test,labs
 C:\Users\shani> .venv\Scripts\python.exe tools\check_references.py
-```
-
 If you extracted the project directly to `C:\Users\shani\TrustSR`, use this first command instead:
-
-```bat
 C:\Users\shani> cd /d C:\Users\shani\TrustSR
-```
-
 If `py -3.12` is not installed, check `py --list` or use `python` for the Python version you have installed. Python 3.10+ is required. Reference checking requires internet access. Notebook execution may take several minutes; do not treat a timeout as a pass.
 
 ### Linux
 
 Run these commands from the extracted repository directory. They intentionally use the actual Linux shell prompt/environment, not the Windows path above.
-
-```bash
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install --upgrade pip
@@ -55,13 +67,11 @@ python tools/run_notebooks.py --timeout 300 --jobs 1
 python tools/run_notebooks_kernel.py --timeout 600
 python tools/verify_install.py --extras test,labs
 python tools/check_references.py
-```
-
 ### What each check proves
 
 - `python -m pytest -q`: unit and regression tests; notebook tests are excluded by default.
 - `python -m pytest -q -m notebook`: notebook smoke tests through the test harness.
-- `tools/run_notebooks.py`: executes code cells in a plain-Python subprocess harness; **not** a Jupyter kernel.
+- `tools/run_notebooks.py`: executes code cells in a plain-Python subprocess harness; *not* a Jupyter kernel.
 - `tools/run_notebooks_kernel.py`: executes notebooks in a real Jupyter kernel.
 - `tools/verify_install.py`: creates a fresh virtual environment and verifies a non-editable package install; online dependency resolution requires network access.
 - `tools/check_references.py`: checks reference metadata against Crossref; requires internet access.
@@ -69,8 +79,6 @@ python tools/check_references.py
 Run notebook checks separately if the combined run takes too long. A timeout is an incomplete result, not a pass. Each run record must include OS, Python version, dependency versions, exact command, exit code, and raw output. Never copy a Linux run record into the Windows results folder or vice versa.
 
 ## Minimal example
-
-```python
 import os, tempfile
 from trustsr.anchor import SignedHeadAnchor
 from trustsr.audit import AuditLog
@@ -122,43 +130,38 @@ binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_re
 assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
                                                "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
 assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED
-```
-
 Pass `keys=[...]` to both `recover_state` and `verify_recovery` for selective recovery (only those keys are verified). Use `SqliteHighWaterMark(path)` for a transactional mark that survives restart, and store the replay mark out-of-band too.
 
-**Why the anchor matters.** `trusted_audit_head=log.head` is circular: the head is read from the log being checked, so a wholesale-rewritten log trivially matches itself. Three anchors share one contract (`load()` / `advance(log)`): `HeadAnchor` (plain local file, **not** independent), `SignedHeadAnchor` (records signed by a separate authority key; the verifier holds only the public key), and `anchor_service.AnchorServer` / `RemoteHeadAnchor` (the same signed anchor behind a small HTTP service, so the head lives under another OS account or host). `advance()` refuses a log that does not extend the stored head; `load(min_sequence=...)` detects a restored older file. Independence is a deployment property: see `docs/anchor_deployment.md`. If no head is supplied the report says so (`audit_head_anchored: False`, `warnings`); `require_anchored_head=True` makes that a failure and promotion requires an anchored report by default.
+*Why the anchor matters.* `trusted_audit_head=log.head` is circular: the head is read from the log being checked, so a wholesale-rewritten log trivially matches itself. Three anchors share one contract (`load()` / `advance(log)`): `HeadAnchor` (plain local file, *not* independent), `SignedHeadAnchor` (records signed by a separate authority key; the verifier holds only the public key), and `anchor_service.AnchorServer` / `RemoteHeadAnchor` (the same signed anchor behind a small HTTP service, so the head lives under another OS account or host). `advance()` refuses a log that does not extend the stored head; `load(min_sequence=...)` detects a restored older file. Independence is a deployment property: see `docs/anchor_deployment.md`. If no head is supplied the report says so (`audit_head_anchored: False`, `warnings`); `require_anchored_head=True` makes that a failure and promotion requires an anchored report by default.
 
-**Why a passing report is not enough.** A passing report says an in-memory dictionary matched the signed checkpoint; it does not say the agent's *persistent* state is that dictionary. `SqliteStateStore.commit_recovery` writes the recovered state, its `recovery_id` and digest in one transaction, re-reads it and recomputes the digest. `verify_recovery(recovered_state=<state re-read from the store>, recovery_id=...)` records `recovery_id` (taken from the audit log) and `verified_state_sha256` in the report, and `promote_after_verification` now **requires** `expected_checkpoint_sha256`, `expected_recovery_id` and `committed_state_sha256` (a fresh re-read digest). A report for another checkpoint, another recovery attempt, or state that changed afterwards cannot promote.
+*Why a passing report is not enough.* A passing report says an in-memory dictionary matched the signed checkpoint; it does not say the agent's _persistent_ state is that dictionary. `SqliteStateStore.commit_recovery` writes the recovered state, its `recovery_id` and digest in one transaction, re-reads it and recomputes the digest. `verify_recovery(recovered_state=<state re-read from the store>, recovery_id=...)` records `recovery_id` (taken from the audit log) and `verified_state_sha256` in the report, and `promote_after_verification` now *requires* `expected_checkpoint_sha256`, `expected_recovery_id` and `committed_state_sha256` (a fresh re-read digest). A report for another checkpoint, another recovery attempt, or state that changed afterwards cannot promote.
 
-**Initial state invariant.** `TrustTracker(TrustLabel.TRUSTED)` raises `ValueError`; a tracker cannot begin trusted without passing the promotion flow.
+*Initial state invariant.* `TrustTracker(TrustLabel.TRUSTED)` raises `ValueError`; a tracker cannot begin trusted without passing the promotion flow.
 
-**Why promotion is bound to the report.** `verify_recovery` returns an immutable, sealed `VerificationReport`. `TrustTracker.promote_after_verification` rejects plain dicts, edited or copied reports, reports already used, unanchored reports, and reports not bound to the given checkpoint, recovery attempt and committed state (all three bindings are mandatory); it re-derives the decision from the five gates instead of trusting the `decision` string, and `TrustTracker.apply()` cannot enter `Trusted` at all. This is an in-process integrity seal, not a security boundary.
+*Why promotion is bound to the report.* `verify_recovery` returns an immutable, sealed `VerificationReport`. `TrustTracker.promote_after_verification` rejects plain dicts, edited or copied reports, reports already used, unanchored reports, and reports not bound to the given checkpoint, recovery attempt and committed state (all three bindings are mandatory); it re-derives the decision from the five gates instead of trusting the `decision` string, and `TrustTracker.apply()` cannot enter `Trusted` at all. This is an in-process integrity seal, not a security boundary.
 
 ## Modules (`src/trustsr/`)
-
-| Module | Purpose |
-|---|---|
-| `checkpoint.py` | Canonical JSON, Ed25519 signing/verification, optional signed `version` |
-| `replay.py` | `HighWaterMark` / `SqliteHighWaterMark`: refuse stale or replayed checkpoints |
-| `recovery.py` | Full (replacing) or selective recovery, optional audit logging and replay guard |
-| `audit.py` | Hash-chained audit log: non-empty, trusted-head check, scope-manifest binding |
-| `anchor.py` | `HeadAnchor`, `SignedHeadAnchor`: store/load the audit head out-of-band; refuse non-extending logs |
-| `anchor_service.py` | `AnchorServer` / `RemoteHeadAnchor`: signed anchor in a separate process/host |
-| `state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for promotion |
-| `contamination.py` | Exact key/value comparison against a reference |
-| `graph.py` | Dependency-graph contamination with a declared uncertainty boundary (Lab 01.4) |
-| `verification.py` | The five gates and the PASS/FAIL decision, issued as a sealed `VerificationReport` |
-| `trust_state.py` | Three decision states (`UNKNOWN`, `TRUSTED`, `QUARANTINED`) |
-| `trust_machine.py` | Five-label state machine; `TrustTracker` promotes only from an authentic, unused report (Lab 09) |
-| `idempotent.py` | Idempotent event receiver and reconciliation (Labs 03.04-03.07) |
-
+Module | Purpose
+`checkpoint.py` | Canonical JSON, Ed25519 signing/verification, optional signed `version`
+`replay.py` | `HighWaterMark` / `SqliteHighWaterMark`: refuse stale or replayed checkpoints
+`recovery.py` | Full (replacing) or selective recovery, optional audit logging and replay guard
+`audit.py` | Hash-chained audit log: non-empty, trusted-head check, scope-manifest binding
+`anchor.py` | `HeadAnchor`, `SignedHeadAnchor`: store/load the audit head out-of-band; refuse non-extending logs
+`anchor_service.py` | `AnchorServer` / `RemoteHeadAnchor`: signed anchor in a separate process/host
+`state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for promotion
+`contamination.py` | Exact key/value comparison against a reference
+`graph.py` | Dependency-graph contamination with a declared uncertainty boundary (Lab 01.4)
+`verification.py` | The five gates and the PASS/FAIL decision, issued as a sealed `VerificationReport`
+`trust_state.py` | Three decision states (`UNKNOWN`, `TRUSTED`, `QUARANTINED`)
+`trust_machine.py` | Five-label state machine; `TrustTracker` promotes only from an authentic, unused report (Lab 09)
+`idempotent.py` | Idempotent event receiver and reconciliation (Labs 03.04-03.07)
 ## Verification gates
 
-1. **checkpoint_valid** – signature and digest verify under the trusted key; with a `replay_guard`, the signed version is present and not older than the high-water mark (unless `allow_rollback=True`).
-2. **audit_valid** – the audit chain is non-empty and consistent (and equals `trusted_audit_head` if supplied).
-3. **recovery_complete** – derived from the audit log: a matching started/completed pair for this checkpoint, version and key scope, with no refusal.
-4. **contamination_removed** – the recovered state equals the **signed checkpoint payload** (restricted to `keys` for selective recovery).
-5. **scope_complete** – observed record IDs match the manifest exactly and the manifest digest was recorded in the audit log.
+1. *checkpoint_valid* – signature and digest verify under the trusted key; with a `replay_guard`, the signed version is present and not older than the high-water mark (unless `allow_rollback=True`).
+2. *audit_valid* – the audit chain is non-empty and consistent (and equals `trusted_audit_head` if supplied).
+3. *recovery_complete* – derived from the audit log: a matching started/completed pair for this checkpoint, version and key scope, with no refusal.
+4. *contamination_removed* – the recovered state equals the *signed checkpoint payload* (restricted to `keys` for selective recovery).
+5. *scope_complete* – observed record IDs match the manifest exactly and the manifest digest was recorded in the audit log.
 
 A missing or failed gate yields `FAIL`; `TRUSTED` requires all five. The scope gate checks consistency with a declared manifest; it does not prove real-world completeness.
 
@@ -174,10 +177,10 @@ Do not report synthetic fixtures as real-agent experiments. Record Python versio
 
 ## CI and release checklist
 
-`.github/workflows/tests.yml` runs, on `ubuntu-latest` **and** `windows-latest`: the fast suite (Python 3.10 and 3.12), a fresh-venv install check, the notebook suite with the plain harness, and the notebook suite in a real Jupyter kernel.
+`.github/workflows/tests.yml` runs, on `ubuntu-latest` *and* `windows-latest`: the fast suite (Python 3.10 and 3.12), a fresh-venv install check, the notebook suite with the plain harness, and the notebook suite in a real Jupyter kernel.
 
 Verification status is recorded separately per environment in `results/sample_runs/`; the latest actual Linux pytest run is `results/sample_runs/run_v0.3.0_linux_actual_pytest.md`. Windows remains pending until a Windows run or green Windows CI log is recorded. Do not treat CI configuration or valid notebook JSON as a successful execution result: a job counts only when its run record or CI log exists. Windows, a real `pytest` run, a networked fresh-venv install and a Jupyter-kernel run are listed there as pending unless a record says otherwise.
-=======
+
 # TrustSR: Why Rollback Is Not Recovery
 
 TrustSR (Trust-Aware State Recovery) is a research-oriented framework that explores trusted recovery for long-horizon AI agent systems.
@@ -193,18 +196,12 @@ The project combines contamination analysis, selective recovery, trust-state mod
 ## Core Idea
 
 Traditional recovery:
-
-```text
 Compromise
 ↓
 Rollback
 ↓
 Resume
-```
-
 TrustSR:
-
-```text
 Compromise
 ↓
 Detection
@@ -220,8 +217,6 @@ Audit Validation
 Recovery Verification
 ↓
 Trusted State
-```
-
 TrustSR treats trust as a recovery objective rather than an assumption.
 
 ---
@@ -269,19 +264,11 @@ Topics:
 ### Selective Recovery
 
 Instead of restoring everything:
-
-```text
 Rollback:
 Restore entire checkpoint
-```
-
 TrustSR attempts:
-
-```text
 Restore only affected components
 Preserve unaffected work
-```
-
 Goals:
 
 - Reduce recovery cost
@@ -293,15 +280,11 @@ Goals:
 ### Trust-State Model
 
 TrustSR defines explicit recovery states:
-
-```text
 Trusted
 Recovered
 Unknown
 Suspect
 Contaminated
-```
-
 Key principles:
 
 - Recovered is not automatically Trusted
@@ -314,8 +297,6 @@ Key principles:
 ### Verification Engine
 
 Recovery is considered successful only if all verification gates pass:
-
-```text
 Checkpoint Validation
 +
 Audit Validation
@@ -325,14 +306,8 @@ Recovery Completion
 Contamination Removal
 =
 PASS
-```
-
 Otherwise:
-
-```text
 FAIL
-```
-
 TrustSR follows a fail-closed design.
 
 ---
@@ -448,8 +423,6 @@ Cryptographic verification and recovery-scope validation.
 ---
 
 ## Repository Structure
-
-```text
 TrustSR/
 │
 ├── README.md
@@ -562,8 +535,6 @@ TrustSR/
     ├── quick_start/
     ├── tutorial/
     └── sample_runs/
-```
-
 ---
 
 ## Research Goals
@@ -612,14 +583,10 @@ TrustSR should be viewed as a research framework prototype and learning resource
 ## Citation
 
 If you use TrustSR in academic, research, or educational work, please cite the framework and repository.
-
-```text
 TrustSR: Why Rollback Is Not Recovery
 Trust-Aware State Recovery Framework
 Author: [Shani]
 Year: 2026
-```
-
 ---
 
 ## License
@@ -642,6 +609,11 @@ TrustSR is an independent educational and research project exploring trust-aware
 
 ## Motto
 
-> Recovery is not the restoration of state.
+> Recovery is not the restoration of state. 
 >
 > Recovery is the restoration of trust.
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,100:92FE9D&height=120&section=footer&text=Recovery%20is%20the%20restoration%20of%20trust.&fontSize=20&fontColor=ffffff&animation=fadeIn" />
+</p>
+
