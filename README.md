@@ -48,24 +48,28 @@ TrustSR explores a fail-closed recovery workflow for agent state: restore state 
 
 >  Recovery is not merely restoring state; it is verifying whether trust can be reinstated.
 
-```mermaid
-flowchart LR
-    A(["Signed Checkpoint"]):::blue --> B(["Recover State"]):::orange
-    B --> C(["Audit Log"]):::purple
-    C --> D(["Compare with Signed Payload"]):::teal
-    D --> E(["Scope Check"]):::pink
-    E --> F{{"All 5 Gates Pass?"}}:::red
-    F -->|Yes| G(["TRUSTED"]):::green
-    F -->|No| H(["FAIL / Quarantine"]):::dark
-    classDef blue fill:#0ea5e9,stroke:#0369a1,color:#fff;
-    classDef orange fill:#f97316,stroke:#c2410c,color:#fff;
-    classDef purple fill:#8b5cf6,stroke:#5b21b6,color:#fff;
-    classDef teal fill:#14b8a6,stroke:#0f766e,color:#fff;
-    classDef pink fill:#ec4899,stroke:#9d174d,color:#fff;
-    classDef red fill:#ef4444,stroke:#991b1b,color:#fff;
-    classDef green fill:#22c55e,stroke:#15803d,color:#fff;
-    classDef dark fill:#374151,stroke:#111827,color:#fff;
-```
+<div align="center">
+
+![Signed Checkpoint](https://img.shields.io/badge/Signed%20Checkpoint-0ea5e9?style=for-the-badge&labelColor=0ea5e9&color=0ea5e9)
+&rarr;
+![Recover State](https://img.shields.io/badge/Recover%20State-f97316?style=for-the-badge&labelColor=f97316&color=f97316)
+&rarr;
+![Audit Log](https://img.shields.io/badge/Audit%20Log-8b5cf6?style=for-the-badge&labelColor=8b5cf6&color=8b5cf6)
+&rarr;
+![Compare with Signed Payload](https://img.shields.io/badge/Compare%20with%20Signed%20Payload-14b8a6?style=for-the-badge&labelColor=14b8a6&color=14b8a6)
+&rarr;
+![Scope Check](https://img.shields.io/badge/Scope%20Check-ec4899?style=for-the-badge&labelColor=ec4899&color=ec4899)
+&rarr;
+![All 5 Gates Pass](https://img.shields.io/badge/All%205%20Gates%20Pass-ef4444?style=for-the-badge&labelColor=ef4444&color=ef4444)
+
+</div>
+
+<div align="center">
+
+![Yes - TRUSTED](https://img.shields.io/badge/Yes%20--%20TRUSTED-22c55e?style=for-the-badge&labelColor=22c55e&color=22c55e)&nbsp;&nbsp;&nbsp;![No - FAIL / Quarantine](https://img.shields.io/badge/No%20--%20FAIL%20%2F%20Quarantine-374151?style=for-the-badge&labelColor=374151&color=374151)
+
+</div>
+
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,16&height=10&section=header" width="100%" alt=""/>
 
@@ -394,24 +398,40 @@ Trusted State
 
 TrustSR treats trust as a recovery objective rather than an assumption.
 
-```mermaid
-flowchart TD
-    A(["Compromise"]):::red --> B(["Detection"]):::orange
-    B --> C(["Contamination Analysis"]):::yellow
-    C --> D(["Trust Classification"]):::lime
-    D --> E(["Selective Recovery"]):::green
-    E --> F(["Audit Validation"]):::teal
-    F --> G(["Recovery Verification"]):::blue
-    G --> H(["Trusted State"]):::purple
-    classDef red fill:#ef4444,stroke:#991b1b,color:#fff;
-    classDef orange fill:#f97316,stroke:#9a3412,color:#fff;
-    classDef yellow fill:#eab308,stroke:#854d0e,color:#000;
-    classDef lime fill:#84cc16,stroke:#3f6212,color:#000;
-    classDef green fill:#22c55e,stroke:#166534,color:#fff;
-    classDef teal fill:#14b8a6,stroke:#115e59,color:#fff;
-    classDef blue fill:#3b82f6,stroke:#1e3a8a,color:#fff;
-    classDef purple fill:#a855f7,stroke:#581c87,color:#fff;
-```
+<div align="center">
+
+![Compromise](https://img.shields.io/badge/Compromise-ef4444?style=for-the-badge&labelColor=ef4444&color=ef4444)
+
+&darr;
+
+![Detection](https://img.shields.io/badge/Detection-f97316?style=for-the-badge&labelColor=f97316&color=f97316)
+
+&darr;
+
+![Contamination Analysis](https://img.shields.io/badge/Contamination%20Analysis-eab308?style=for-the-badge&labelColor=eab308&color=eab308)
+
+&darr;
+
+![Trust Classification](https://img.shields.io/badge/Trust%20Classification-84cc16?style=for-the-badge&labelColor=84cc16&color=84cc16)
+
+&darr;
+
+![Selective Recovery](https://img.shields.io/badge/Selective%20Recovery-22c55e?style=for-the-badge&labelColor=22c55e&color=22c55e)
+
+&darr;
+
+![Audit Validation](https://img.shields.io/badge/Audit%20Validation-14b8a6?style=for-the-badge&labelColor=14b8a6&color=14b8a6)
+
+&darr;
+
+![Recovery Verification](https://img.shields.io/badge/Recovery%20Verification-3b82f6?style=for-the-badge&labelColor=3b82f6&color=3b82f6)
+
+&darr;
+
+![Trusted State](https://img.shields.io/badge/Trusted%20State-a855f7?style=for-the-badge&labelColor=a855f7&color=a855f7)
+
+</div>
+
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24,0,6&height=6&section=header" width="100%" alt=""/>
 
@@ -531,25 +551,20 @@ Key principles:
 - Unknown is not treated as clean
 - Contaminated states cannot directly become Trusted
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> Unknown
-    Unknown --> Suspect
-    Suspect --> Contaminated
-    Contaminated --> Recovered
-    Recovered --> Trusted: all gates PASS
-    classDef t fill:#22c55e,color:#fff
-    classDef r fill:#3b82f6,color:#fff
-    classDef u fill:#9ca3af,color:#fff
-    classDef s fill:#f59e0b,color:#fff
-    classDef c fill:#ef4444,color:#fff
-    class Trusted t
-    class Recovered r
-    class Unknown u
-    class Suspect s
-    class Contaminated c
-```
+<div align="center">
+
+![Unknown](https://img.shields.io/badge/Unknown-9ca3af?style=for-the-badge&labelColor=9ca3af&color=9ca3af)
+&rarr;
+![Suspect](https://img.shields.io/badge/Suspect-f59e0b?style=for-the-badge&labelColor=f59e0b&color=f59e0b)
+&rarr;
+![Contaminated](https://img.shields.io/badge/Contaminated-ef4444?style=for-the-badge&labelColor=ef4444&color=ef4444)
+&rarr;
+![Recovered](https://img.shields.io/badge/Recovered-3b82f6?style=for-the-badge&labelColor=3b82f6&color=3b82f6)
+&rarr;
+![Trusted](https://img.shields.io/badge/Trusted-22c55e?style=for-the-badge&labelColor=22c55e&color=22c55e)
+
+</div>
+
 
 </details>
 
