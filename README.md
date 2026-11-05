@@ -166,12 +166,6 @@ Run notebook checks separately if the combined run takes too long. A timeout is 
 
 ## Minimal example
 
-<details open>
-<summary><b>Full Python example &nbsp;— click to expand / collapse</b></summary>
-
-<br>
-## Minimal example
-
 ```python
 import os, tempfile
 from trustsr.anchor import SignedHeadAnchor
