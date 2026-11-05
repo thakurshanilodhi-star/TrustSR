@@ -218,6 +218,7 @@ binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_re
 assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
                                                "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
 assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED
+
 ## Modules (`src/trustsr/`)
 ## Modules (`src/trustsr/`)
 
@@ -229,7 +230,57 @@ assert tracker.promote_after_verification(report, **binding)[0] and tracker.labe
 | `audit.py` | Hash-chained audit log: non-empty, trusted-head check, scope-manifest binding |
 | `anchor.py` | `HeadAnchor`, `SignedHeadAnchor`: store/load the audit head out-of-band; refuse non-extending logs |
 | `anchor_service.py` | `AnchorServer` / `RemoteHeadAnchor`: signed anchor in a separate process/host |
-| `state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for promotion |
+| `state_store.py` | `SqliteStateStore`: atomic commit of a recovery, fresh re-read, state digest for pimport os, tempfile
+from trustsr.anchor import SignedHeadAnchor
+from trustsr.audit import AuditLog
+from trustsr.checkpoint import generate_keypair, sign_checkpoint
+from trustsr.recovery import recover_state_attempt
+from trustsr.replay import HighWaterMark
+from trustsr.state_store import SqliteStateStore
+from trustsr.trust_machine import TrustLabel, TrustTracker
+from trustsr.verification import verify_recovery
+
+private_key, public_key = generate_keypair()           # demo only: provision real keys independently
+checkpoint = sign_checkpoint({"step": 4, "mode": "safe"}, private_key, version=2)
+
+guard = HighWaterMark(); guard.register(2)             # newest checkpoint version ever issued
+manifest = {"expected_record_ids": ["e1", "e2"], "expected_count": 2}
+log = AuditLog()
+log.append("checkpoint_created", {"id": "cp-2"})
+log.declare_scope(manifest)                            # binds the manifest digest into the audit chain
+
+work = tempfile.mkdtemp()
+store = SqliteStateStore(os.path.join(work, "agent_state.db"))   # the agent's persistent state
+store.write_state({"step": 999, "mode": "unsafe", "x": 1})
+
+# --- recovery controller -------------------------------------------------------------------
+attempt = recover_state_attempt(checkpoint, public_key, store.read_committed().state,
+                                audit_log=log, replay_guard=guard)
+committed = store.commit_recovery(attempt)             # atomic write, then an independent re-read
+assert committed.state == {"step": 4, "mode": "safe"}  # full recovery drops injected keys
+
+# The audit head is recorded by an anchor AUTHORITY (own key, ideally own account/host; see
+# docs/anchor_deployment.md). Verifiers hold only its public key. Never pass `log.head` from the log under test.
+anchor_private, anchor_public = generate_keypair()     # demo only: in real use this key never touches the controller
+anchor = SignedHeadAnchor(os.path.join(work, "audit_head.json"), anchor_public, signer=anchor_private)
+anchor.advance(log)
+
+# --- verifier (separate component/process): loads the previously stored head ---------------
+report = verify_recovery(checkpoint=checkpoint, public_key=public_key, audit_log=log,
+                         recovered_state=committed.state, scope_manifest=manifest,
+                         observed_record_ids=["e1", "e2"], replay_guard=guard,
+                         recovery_id=attempt.recovery_id,
+                         trusted_audit_head=anchor.load(), require_anchored_head=True)
+assert report["decision"] == "PASS" and report["recovery_id"] == attempt.recovery_id
+
+# --- promotion: bound to checkpoint, recovery attempt AND the state freshly re-read from the store ---
+tracker = TrustTracker(TrustLabel.RECOVERED)
+fresh = store.read_committed()
+binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_recovery_id=fresh.recovery_id,
+               committed_state_sha256=fresh.state_sha256)
+assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
+                                               "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
+assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTEDromotion |
 | `contamination.py` | Exact key/value comparison against a reference |
 | `graph.py` | Dependency-graph contamination with a declared uncertainty boundary (Lab 01.4) |
 | `verification.py` | The five gates and the PASS/FAIL decision, issued as a sealed `VerificationReport` |
