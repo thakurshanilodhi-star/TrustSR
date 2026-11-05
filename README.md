@@ -217,7 +217,7 @@ binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_re
                committed_state_sha256=fresh.state_sha256)
 assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
                                                "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
-assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED
+assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED```
 
 ## Modules (`src/trustsr/`)
 ## Modules (`src/trustsr/`)
