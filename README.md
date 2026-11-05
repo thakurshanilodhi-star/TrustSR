@@ -170,6 +170,8 @@ Run notebook checks separately if the combined run takes too long. A timeout is 
 <summary><b>Full Python example &nbsp;— click to expand / collapse</b></summary>
 
 <br>
+## Minimal example
+
 ```python
 import os, tempfile
 from trustsr.anchor import SignedHeadAnchor
@@ -222,18 +224,6 @@ binding = dict(expected_checkpoint_sha256=attempt.checkpoint_sha256, expected_re
 assert not tracker.promote_after_verification({"decision": "PASS", "trust_state": "trusted",
                                                "gates": {"checkpoint_valid": True}}, **binding)[0]   # forged dict
 assert tracker.promote_after_verification(report, **binding)[0] and tracker.label is TrustLabel.TRUSTED
-```
-
-Pass `keys=[...]` to both `recover_state` and `verify_recovery` for selective recovery (only those keys are verified). Use `SqliteHighWaterMark(path)` for a transactional mark that survives restart, and store the replay mark out-of-band too.
-
-**Why the anchor matters.** `trusted_audit_head=log.head` is circular: the head is read from the log being checked, so a wholesale-rewritten log trivially matches itself. Three anchors share one contract (`load()` / `advance(log)`): `HeadAnchor` (plain local file, **not** independent), `SignedHeadAnchor` (records signed by a separate authority key; the verifier holds only the public key), and `anchor_service.AnchorServer` / `RemoteHeadAnchor` (the same signed anchor behind a small HTTP service, so the head lives under another OS account or host). `advance()` refuses a log that does not extend the stored head; `load(min_sequence=...)` detects a restored older file. Independence is a deployment property: see `docs/anchor_deployment.md`. If no head is supplied the report says so (`audit_head_anchored: False`, `warnings`); `require_anchored_head=True` makes that a failure and promotion requires an anchored report by default.
-
-**Why a passing report is not enough.** A passing report says an in-memory dictionary matched the signed checkpoint; it does not say the agent's *persistent* state is that dictionary. `SqliteStateStore.commit_recovery` writes the recovered state, its `recovery_id` and digest in one transaction, re-reads it and recomputes the digest. `verify_recovery(recovered_state=<state re-read from the store>, recovery_id=...)` records `recovery_id` (taken from the audit log) and `verified_state_sha256` in the report, and `promote_after_verification` now **requires** `expected_checkpoint_sha256`, `expected_recovery_id` and `committed_state_sha256` (a fresh re-read digest). A report for another checkpoint, another recovery attempt, or state that changed afterwards cannot promote.
-
-**Initial state invariant.** `TrustTracker(TrustLabel.TRUSTED)` raises `ValueError`; a tracker cannot begin trusted without passing the promotion flow.
-
-**Why promotion is bound to the report.** `verify_recovery` returns an immutable, sealed `VerificationReport`. `TrustTracker.promote_after_verification` rejects plain dicts, edited or copied reports, reports already used, unanchored reports, and reports not bound to the given checkpoint, recovery attempt and committed state (all three bindings are mandatory); it re-derives the decision from the five gates instead of trusting the `decision` string, and `TrustTracker.apply()` cannot enter `Trusted` at all. This is an in-process integrity seal, not a security boundary.
-
 ## Modules (`src/trustsr/`)
 ## Modules (`src/trustsr/`)
 
